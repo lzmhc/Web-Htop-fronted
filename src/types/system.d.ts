@@ -21,6 +21,7 @@ export interface GlobalMemoryDto {
   totalMemory:       string;
   virtualUsedMemory: string;
   virtuallMemory:    string;
+  percentage:        number;
 }
 
 export interface GraphicsCardDto {
@@ -57,6 +58,7 @@ export interface PowerDto {
   discharging:     boolean;
   currentCapacity: number;
   maxCapacity:     number;
+  designCapacity:  number;
   chemistry:       string;
   manufacturer:    string;
 }
@@ -77,7 +79,3 @@ export interface StorageDtoList {
   total:       string;
   diskCount:   string;
 }
-
-// export default {
-
-// }

@@ -1,124 +1,82 @@
 {
-  "info":{
-    "computerSystemDto": {
-        "manufacturer": "Dell Inc.",
-        //制造商
-        "model": "0YNMMF",
-        //产品名称
-        "version": "1.10.0",
-        //BIOS版本
-        "release_date": "2019-07-04"
-        //发布日期
+  info: {
+    computerSystemDto: {
+      manufacturer: 'Dell Inc.',
+      model: '0YNMMF',
+      version: '1.10.0',
+      release_date: '2019-07-04',
     },
-    "processorDto": {
-        "name": "Intel(R) Core(TM) i7-8650U CPU @ 1.90GHz",
-        //处理器
-        "coreCount": 8,
-        //CPU核心
-        "maxFreq": "4.2 GHz",
-        //最大频率
-        "currentFreq": "2.5 GHz",
-        //当前频率
-        "bitDepth": "64-bit",
-        //位数
-        "sensorsVoltage": "0.00 V",
-        //CPU电压
-        "sensoresTemperature": "77.00 摄氏度",
-        //CPU温度
-        "sensoresSpeedList": [
-            "6362rpm"
-        ]
-        //风扇转速
+    processorDto: {
+      name: 'Intel(R) Core(TM) i7-8650U CPU @ 1.90GHz',
+      coreCount: 8,
+      maxFreq: '4.2 GHz',
+      currentFreq: '3.0 GHz',
+      bitDepth: '64-bit',
+      sensorsVoltage: '0.00 V',
+      sensoresTemperature: '82.00 ℃',
+      sensoresSpeedList: ['6414rpm'],
     },
-    "operatingSystemDto": {
-        "family": null,
-        //操作系统名称
-        "bitness": 64,
-        //操作系统位数
-        "versionInfo": {
-            "version": "20.9",
-            //版本
-            "codeName": "unknown",
-            "buildNumber": "5.18.17-amd64-desktop-hwe"
-            //操作系统版本号
-        },
-        "systemboottime": "2024-12-11 12:25:00"
-        //开机时间
+    operatingSystemDto: {
+      family: 'Deepin',
+      bitness: 64,
+      versionInfo: {
+        version: '20.9',
+        codeName: 'unknown',
+        buildNumber: '5.18.17-amd64-desktop-hwe',
+      },
+      systemboottime: '2024-12-12 12:34:48',
     },
-    "globalMemoryDto": {
-        "availableMemory": "6.66",
-        //可用 GB
-        "usedMemory": "8.85",
-        //已使用 GB
-        "totalMemory": "15.51",
-        //物理内存 GB
-        "virtualUsedMemory": "0.01",
-        //虚拟内存已用 GB
-        "virtuallMemory": "8.00"
-        //虚拟内存
+    globalMemoryDto: {
+      availableMemory: '7.94 GB',
+      usedMemory: '7.58 GB',
+      totalMemory: '15.51 GB',
+      virtualUsedMemory: '966.00 MB',
+      virtuallMemory: '8.00 GB',
+      percentage: 0.488442972263822,
+      //内存使用率
     },
-     "powerDto": {
-        "name": "BAT0",
-        //电源名称
-        "deviceName": "DELL 725KY83",
-        //设备名称
-        "voltage": "8.753E12 v",
-        //电压
-        "powerOnLine": false,
-        //是否接入电源
-        "charging": false,
-        //是否充电
-        "discharging": false,
-        //是否放电
-        "currentCapacity": 777777,
-        //当前容量，不知道为什么变成0了
-        "maxCapacity": 7894000,
-        //最大容量
-        "chemistry": "Li-ion",
-        //电池性质
-        "manufacturer": "LGG-LGG7.740"
-        //电池制造商
+    powerDto: {
+      name: 'BAT0',
+      deviceName: 'DELL 725KY83',
+      voltage: '8760000.00 V',
+      powerOnLine: false,
+      charging: false,
+      discharging: false,
+      currentCapacity: 7894000,
+      maxCapacity: 7894000,
+      designCapacity: -1,
+      chemistry: 'Li-ion',
+      manufacturer: 'LGG-LGG7.740',
     },
-    //电源
-    "storageDtoList": [
-        {
-            "mainStorage": "SD_MMC_CRW",
-            "total": "954 GiB Total",
-            "diskCount": "2Disks"
-            //不知道为什么会有这个，我的电脑只有一个硬盘
-        },
-        {
-            "mainStorage": "PM981 NVMe Samsung 1024GB",
-            //磁盘型号
-            "total": "954 GiB Total",
-            //磁盘容量
-            "diskCount": "2Disks"
-            //磁盘数量
-        }
+    storageDtoList: [
+      {
+        mainStorage: 'SD_MMC_CRW',
+        total: '954 GiB Total',
+        diskCount: '2Disks',
+      },
+      {
+        mainStorage: 'PM981 NVMe Samsung 1024GB',
+        total: '954 GiB Total',
+        diskCount: '2Disks',
+      },
     ],
-    //磁盘
-    "graphicsCardDto": {
-        "graphicsCardList": [
-            {
-                "name": "UHD Graphics 620",
-                //显卡型号
-                "deviceId": "0x5917",
-                //设备id
-                "vendor": "Intel Corporation (0x8086)",
-                //供应商
-                "versionInfo": "unknown",
-                "vram": 268435456
-                //显存，我会改为GB单位
-            },
-            {
-                "name": "Sunrise Point-LP Integrated Sensor Hub",
-                "deviceId": "0x9d35",
-                "vendor": "Intel Corporation (0x8086)",
-                "versionInfo": "unknown",
-                "vram": 0
-                //同上
-            }
-        ]
-    }
+    graphicsCardDto: {
+      graphicsCardList: [
+        {
+          name: 'UHD Graphics 620',
+          deviceId: '0x5917',
+          vendor: 'Intel Corporation (0x8086)',
+          versionInfo: 'unknown',
+          vram: 268435456,
+        },
+        {
+          name: 'Sunrise Point-LP Integrated Sensor Hub',
+          deviceId: '0x9d35',
+          vendor: 'Intel Corporation (0x8086)',
+          versionInfo: 'unknown',
+          vram: 0,
+        },
+      ],
+    },
   }
 }

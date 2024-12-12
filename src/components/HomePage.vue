@@ -49,10 +49,11 @@ const refreshData = async () => {
 
   machine.value.type = temp.operatingSystemDto.family;
   // 由后端直接给出百分比，后期修改。  
-  // machine.value.usage = Math.floor(
+  machine.value.usage = Math.floor(temp.globalMemoryDto.percentage*100) + '';
+  // Math.floor(
   //   (temp.globalMemoryDto.usedMemory / temp.globalMemoryDto.totalMemory) * 100
   // ) + '' ;
-  machine.value.bt1 = temp.globalMemoryDto.totalMemory + 'GB RAM';
+  machine.value.bt1 = temp.globalMemoryDto.totalMemory;
   // DDR3，找不到信息反
   // processor.value.bt2 = temp.processorDto.currentFreq;
   // 进程数，也是没有
@@ -197,7 +198,7 @@ onUnmounted(()=>{
         </div>
       </div>
       <div class="footer">
-        <a href="/index2.html">
+        <a href="/about">
           <img src="/img/toggle.png" width="36px" alt="转换模式" class="toggle">
         </a>
       </div>
