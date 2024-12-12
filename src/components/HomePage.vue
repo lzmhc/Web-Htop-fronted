@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import axios from 'axios';
 import Card from './HomePage/Card.vue';
 import { onMounted, ref,onUnmounted } from 'vue';
 import type { System } from '@/types/system';
@@ -35,14 +34,15 @@ const storage = ref({
 });
 const healthPercent = ref(0);
 const memoryPercent = ref(0);
+const displayMemory = ref('')
+const displayMemory2 = ref('')
 const refreshData = async () => {
   let temp: System;
   temp = await getSystemInfos();
   infos.value = temp;
-  console.log(temp);
   // processor.value.type = 'Intel(R) Core(TM) i7-8650U CPU @ 1.90GHz';
   processor.value.type = temp.processorDto.name;
-  processor.value.usage = 'NULL';
+  processor.value.usage = temp.processorDto.usedRate;
   processor.value.bt1 = temp.processorDto.coreCount + '核心';
   processor.value.bt2 = temp.processorDto.currentFreq;
   processor.value.bt3 = temp.processorDto.bitDepth;
@@ -55,19 +55,26 @@ const refreshData = async () => {
   // ) + '' ;
   machine.value.bt1 = temp.globalMemoryDto.totalMemory;
   // DDR3，找不到信息反
-  // processor.value.bt2 = temp.processorDto.currentFreq;
+  machine.value.bt2 = temp.globalMemoryDto.ramTypeOrOsBitDepth;
   // 进程数，也是没有
-  // processor.value.bt3 = temp.processorDto.bitDepth;
+  machine.value.bt3 = temp.globalMemoryDto.procCount;
 
   storage.value.type = temp.storageDtoList[0].mainStorage;
-  storage.value.usage = 'NULL';
+  storage.value.usage = temp.storageDtoList[0].usedRate;
   storage.value.bt1 = temp.storageDtoList[0].total;
   storage.value.bt2 = temp.storageDtoList[0].diskCount;
   storage.value.bt3 = temp.globalMemoryDto.virtuallMemory;
+  // 手动计算电池百分比
   healthPercent.value = Math.floor(
     (temp.powerDto.currentCapacity / temp.powerDto.maxCapacity) * 100
   );
-  // memoryPercent.value = 
+  // 手动计算显存
+  displayMemory.value = Math.floor(
+    temp.graphicsCardDto.graphicsCardList[0].vram/1024/1024
+  ) + 'MB';
+  displayMemory2.value = Math.floor(
+    temp.graphicsCardDto.graphicsCardList[1].vram/1024/1024
+  ) + 'MB';
 };
 let refFlag:number;
 onMounted(() => {
@@ -118,7 +125,7 @@ onUnmounted(()=>{
               </tr>
               <tr>
                 <td>显存</td>
-                <td>{{ infos.graphicsCardDto?.graphicsCardList[0].vram }}</td>
+                <td>{{displayMemory}}</td>
               </tr>
             </tbody>
           </table>
@@ -153,7 +160,7 @@ onUnmounted(()=>{
               </tr>
               <tr>
                 <td>显存</td>
-                <td>{{ infos.graphicsCardDto?.graphicsCardList[1].vram }}</td>
+                <td>{{displayMemory2}}</td>
               </tr>
             </tbody>
           </table>
