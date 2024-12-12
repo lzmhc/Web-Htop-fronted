@@ -39,3 +39,4 @@ json-server db.json5
 ```bash
 pnpm build
 ```
+生成dist目录后，将其内部全部文件移动到springboot项目对应的静态文件目录下。  
