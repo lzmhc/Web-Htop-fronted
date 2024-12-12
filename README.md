@@ -34,3 +34,8 @@ json-server db.json5
 	}
 ```
 
+## 部署
+将api中的地址换成`/info`后再打包，请求本地同端口。  
+```bash
+pnpm build
+```
