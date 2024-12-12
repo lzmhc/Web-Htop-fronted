@@ -7,4 +7,30 @@ Web-Htop项目的前端部分。
 ```sh
 pnpm i
 ```
+### 本地模拟接口
+使用json-server来模拟接口，方便开发。  
+> 本项目的模拟json文件为根目录的`db.json5`文件
+```bash
+npm i -g json-server
+```
+
+```bash
+json-server db.json5
+```
+> 默认3000端口
+### 反向代理
+如果在局域网中，与另一台机器进行调试，需要使用反向代理。  
+```ts
+// 项目根目录的vite.config.ts
+// ......
+  server: {
+		proxy: {
+			'/info': {
+				target: 'http://192.168.31.207:8080/',
+				changeOrigin: true,
+				rewrite: (path) => path.replace(/^\/api/, '')
+			}
+		}
+	}
+```
 
