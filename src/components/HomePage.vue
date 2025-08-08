@@ -34,8 +34,14 @@ const storage = ref({
 });
 const healthPercent = ref(0);
 const memoryPercent = ref(0);
-const displayMemory = ref('')
-const displayMemory2 = ref('')
+interface displayMemory {
+  "name": "",
+  "deviceId": "",
+  "vendor": "",
+  "versionInfo": "",
+  "vram": 0
+}
+const displayMemoryList = ref<displayMemory[]>([])
 const refreshData = async () => {
   let temp: System;
   temp = await getSystemInfos();
@@ -69,12 +75,10 @@ const refreshData = async () => {
     (temp.powerDto.currentCapacity / temp.powerDto.maxCapacity) * 100
   );
   // 手动计算显存
-  displayMemory.value = Math.floor(
-    temp.graphicsCardDto.graphicsCardList[0].vram/1024/1024
-  ) + 'MB';
-  displayMemory2.value = Math.floor(
-    temp.graphicsCardDto.graphicsCardList[1].vram/1024/1024
-  ) + 'MB';
+  displayMemoryList.value = temp.graphicsCardDto.graphicsCardList;
+  // displayMemory.value = Math.floor(
+  //   temp.graphicsCardDto.graphicsCardList[0].vram/1024/1024
+  // ) + 'MB';
 };
 let refFlag:number;
 onMounted(() => {
@@ -94,73 +98,37 @@ onUnmounted(()=>{
       </div>
       <div class="bottomPanel">
         <div class="graphics">
-          <table>
-            <colgroup>
-              <col style="width: 100px" />
-              <col />
-              <!-- 其他列可以在这里继续设置或省略 -->
-            </colgroup>
-            <!-- <thead>
-              <tr>
-                <th>显卡1</th>
-              </tr>
-            </thead> -->
-            <caption>
-              显卡1
-            </caption>
-            <tbody>
-              <tr>
-                <td>显卡型号</td>
-                <td>{{ infos.graphicsCardDto?.graphicsCardList[0].name }}</td>
-              </tr>
-              <tr>
-                <td>设备ID</td>
-                <td>
-                  {{ infos.graphicsCardDto?.graphicsCardList[0].deviceId }}
-                </td>
-              </tr>
-              <tr>
-                <td>提供商</td>
-                <td>{{ infos.graphicsCardDto?.graphicsCardList[0].vendor }}</td>
-              </tr>
-              <tr>
-                <td>显存</td>
-                <td>{{displayMemory}}</td>
-              </tr>
-            </tbody>
-          </table>
-          <table>
+          <table v-for="item in displayMemoryList" :key="item.deviceId">
             <colgroup>
               <col style="width: 100px" />
               <col />
               <!-- 其他列可以在这里继续设置或省略 -->
             </colgroup>
             <caption>
-              显卡2
+              显卡
             </caption>
-            <!-- <thead>
-              <tr>
-                <th>显卡2</th>
-              </tr>
-            </thead> -->
             <tbody>
               <tr>
                 <td>显卡型号</td>
-                <td>{{ infos.graphicsCardDto?.graphicsCardList[1].name }}</td>
+                <td>{{ item.name }}</td>
               </tr>
               <tr>
                 <td>设备ID</td>
                 <td>
-                  {{ infos.graphicsCardDto?.graphicsCardList[1].deviceId }}
+                  {{ item.deviceId }}
                 </td>
               </tr>
               <tr>
                 <td>提供商</td>
-                <td>{{ infos.graphicsCardDto?.graphicsCardList[1].vendor }}</td>
+                <td>{{ item.vendor }}</td>
+              </tr>
+               <tr>
+                <td>版本</td>
+                <td>{{ item.versionInfo }}</td>
               </tr>
               <tr>
                 <td>显存</td>
-                <td>{{displayMemory2}}</td>
+                <td>{{ item.vram/1024/1024 }}MB</td>
               </tr>
             </tbody>
           </table>
@@ -172,11 +140,6 @@ onUnmounted(()=>{
               <col />
               <!-- 其他列可以在这里继续设置或省略 -->
             </colgroup>
-            <!-- <thead>
-              <tr>
-                <th>显卡1</th>
-              </tr>
-            </thead> -->
             <caption>
               电源
             </caption>
@@ -203,11 +166,6 @@ onUnmounted(()=>{
             </tbody>
           </table>
         </div>
-      </div>
-      <div class="footer">
-        <a href="/about">
-          <img src="/img/toggle.png" width="36px" alt="转换模式" class="toggle">
-        </a>
       </div>
     </div>
   </div>
@@ -237,7 +195,7 @@ onUnmounted(()=>{
     margin-right: 24px;
     padding: 20px;
     border-radius: 12px;
-    background-color: $black-dark;
+    background-color: #00838F;
     display: flex;
     box-shadow: 3px 3px $red-light;
     caption {
@@ -254,7 +212,7 @@ onUnmounted(()=>{
     }
   }
   .power {
-    background-color: $yellow-light;
+    background-color: #038387;
     border-radius: 12px;
     box-shadow: 3px 3px $red-light;
     padding: 20px;
@@ -278,4 +236,8 @@ onUnmounted(()=>{
   align-items: center;
   padding: 24px 0;
 }
+.card{
+  background-color: #00B294;
+}
+
 </style>

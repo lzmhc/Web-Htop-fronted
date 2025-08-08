@@ -132,5 +132,8 @@ defineProps(['info']);
       }
     }
   }
+  .title p{
+    color: brown !important;
+  }
 }
 </style>

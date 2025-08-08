@@ -28,9 +28,9 @@ export default defineConfig({
   server: {
 		proxy: {
 			'/info': {
-				target: 'http://192.168.31.207:8080/',
-				changeOrigin: true,
-				rewrite: (path) => path.replace(/^\/info/, '')
+				target: 'http://192.168.3.7:8089',
+				changeOrigin: true
+				// rewrite: (path) => path.replace(/^\/info/, '')
 			}
 		}
 	}
